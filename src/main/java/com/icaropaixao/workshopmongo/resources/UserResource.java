@@ -1,7 +1,7 @@
 package com.icaropaixao.workshopmongo.resources;
 
 import com.icaropaixao.workshopmongo.domain.User;
-import com.icaropaixao.workshopmongo.repository.UserRepository;
+import com.icaropaixao.workshopmongo.dto.UserDTO;
 import com.icaropaixao.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value= "/users")
+@RequestMapping(value = "/users")
 public class UserResource {
 
     @Autowired
@@ -22,10 +21,15 @@ public class UserResource {
 
     @RequestMapping(method = RequestMethod.GET)
 
-    public ResponseEntity<List<User>>  findAll(){
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<User> usersList = usService.findAll(); // busca os usuarios com o metodo finAl
 
-        List<User> usersList = usService.findAll(); // busca os usuarios com o metodo finAll
-        return ResponseEntity.ok().body(usersList); // retorna os usuarios
+        // pegando a lista original, transformando em um DTOList (Stream) e transformando em list novamente
+        List<UserDTO> usersDTO = usersList.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(usersDTO); // retorna os usuarios
+
+
     }
 
 }
