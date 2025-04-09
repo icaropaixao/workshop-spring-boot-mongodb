@@ -21,6 +21,7 @@ public class UserService {
         return usRepo.findAll();
     }
 
+    // findBy Id
     public User findById(String id) {
 
         Optional<User> obj = usRepo.findById(id); //
