@@ -2,6 +2,7 @@ package com.icaropaixao.workshopmongo.services;
 
 
 import com.icaropaixao.workshopmongo.domain.User;
+import com.icaropaixao.workshopmongo.dto.UserDTO;
 import com.icaropaixao.workshopmongo.repository.UserRepository;
 import com.icaropaixao.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,13 @@ public class UserService {
 
     }
 
+    // inserir um usuario
+    public User insert(User obj) {
+        return usRepo.insert(obj);
+    }
 
+    public User fromDTO(UserDTO objDTO) {
+        return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+
+    }
 }
