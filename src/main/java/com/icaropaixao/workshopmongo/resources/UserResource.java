@@ -56,4 +56,11 @@ public class UserResource {
     }
 
 
+    // deletar usuario
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        usService.delete(id);
+        return ResponseEntity.noContent().build(); // Retornando um ERRO 204)
+
+    }
 }

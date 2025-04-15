@@ -22,9 +22,10 @@ public class Instantietion implements CommandLineRunner {
         User maria = new User(null, "Maria Brown", "maria@gmail.com");
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
+        User manu = new User(null, "Emanuele Bibiane", "manu@gmail.com");
 
         // Salvando no banco de dados
-        userRepository.saveAll(Arrays.asList(maria, alex, bob));
+        userRepository.saveAll(Arrays.asList(maria, alex, bob, manu));
 
         System.out.println("Usuários salvos no banco!");
     }
