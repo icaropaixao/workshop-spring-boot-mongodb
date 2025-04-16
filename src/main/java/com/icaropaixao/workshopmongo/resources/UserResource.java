@@ -63,4 +63,13 @@ public class UserResource {
         return ResponseEntity.noContent().build(); // Retornando um ERRO 204)
 
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable String id) {
+        User obj = usService.fromDTO(objDTO);
+        obj.setId(id); // atualizando o id para o ID passado na requisição
+        obj = usService.update(obj);
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -49,4 +49,15 @@ public class UserService {
     }
 
 
+    public User update(User obj) {
+        User newObj = findById(obj.getId()); // objeto original do banco de dados
+        updateData(newObj, obj); // atualizando o objetos com novos dados
+        return usRepo.save(newObj);
+    }
+
+    private void updateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
+
 }
