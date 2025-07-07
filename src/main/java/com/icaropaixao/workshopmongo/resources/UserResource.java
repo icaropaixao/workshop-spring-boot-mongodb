@@ -1,5 +1,6 @@
 package com.icaropaixao.workshopmongo.resources;
 
+import com.icaropaixao.workshopmongo.domain.Post;
 import com.icaropaixao.workshopmongo.domain.User;
 import com.icaropaixao.workshopmongo.dto.UserDTO;
 import com.icaropaixao.workshopmongo.services.UserService;
@@ -39,6 +40,13 @@ public class UserResource {
 
     }
 
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = usService.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts()); // convertendo o OBJ para um UserDto
+
+    }
+
     // Inserir usuario
     @PostMapping
     public ResponseEntity<Void> insertUser(@RequestBody UserDTO objDTO) {
@@ -71,5 +79,6 @@ public class UserResource {
         obj = usService.update(obj);
         return ResponseEntity.noContent().build();
     }
+
 
 }
